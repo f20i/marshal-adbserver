@@ -1,0 +1,33 @@
+[project]
+name = "marshal-adbserver"
+version = "0.1.0"
+description = "Marshal ADB Server"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "apscheduler>=3.11.2",
+    "fastapi>=0.136.1",
+    "python-dotenv[cli]>=1.2.2",
+    "uvicorn>=0.46.0",
+]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.41.0",
+]
+
+[tool.uv.sources]
+marshal-adbserver-k8s = { workspace = true }
+
+[tool.uv.sources."marshal-database"]
+git = "https://github.com/f20i/marshal-database.git"
+subdirectory = "python"
+
+# [tool.uv.sources."marshal-database"]
+# path = "../database/python"
+
+[tool.uv.workspace]
+members = [
+  "packages/*",
+  "app",
+]

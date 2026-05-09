@@ -1,0 +1,31 @@
+[project]
+name = "marshal-adbserver-app"
+version = "0.1.0"
+description = "Marshal ADB Server: K8s Jobs API + PostgreSQL state"
+requires-python = ">=3.12"
+dependencies = [
+    "marshal-adbserver-k8s",
+    "marshal-database",
+    "fastapi>=0.136.0",
+    "uvicorn>=0.45.0",
+    "adbutils>=2.12.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.41.0",
+]
+
+[tool.poetry.requires-plugins]
+poethepoet = ">=0.41.0"
+
+[tool.poe.tasks.dev]
+cmd = "dotenv -f .env -- run python -m src.main"
+env = { ENV = "development" }
+
+[tool.poe.tasks.start]
+cmd = "uv run python -m src.main"
+env = { ENV = "production" }
